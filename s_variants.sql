@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Фев 21 2022 г., 02:19
+-- Время создания: Фев 21 2022 г., 15:44
 -- Версия сервера: 5.7.21-20-beget-5.7.21-20-1-log
 -- Версия PHP: 5.6.40
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `s_variants`
 --
 -- Создание: Фев 20 2022 г., 23:19
--- Последнее обновление: Фев 20 2022 г., 23:19
+-- Последнее обновление: Фев 20 2022 г., 23:36
 -- Последняя проверка: Фев 20 2022 г., 23:19
 --
 
@@ -40,9 +40,9 @@ CREATE TABLE `s_variants` (
   `name` varchar(255) NOT NULL,
   `price` decimal(14,2) NOT NULL DEFAULT '0.00',
   `compare_price` decimal(14,2) DEFAULT NULL,
-  `package_weight` decimal(14,2) NOT NULL COMMENT 'Вес в упаковке',
-  `minimum_quantity` mediumint(9) NOT NULL COMMENT 'Минимальное количество',
-  `items_per_package` mediumint(9) NOT NULL COMMENT 'Количество в упаковке / Кратность',
+  `package_weight` decimal(14,2) NOT NULL DEFAULT '1.00' COMMENT 'Вес в упаковке',
+  `minimum_amount` mediumint(9) NOT NULL DEFAULT '1' COMMENT 'Минимальное количество',
+  `items_per_package` mediumint(9) NOT NULL DEFAULT '1' COMMENT 'Количество в упаковке / Кратность',
   `stock` mediumint(9) DEFAULT NULL,
   `position` int(11) NOT NULL,
   `attachment` varchar(255) NOT NULL,

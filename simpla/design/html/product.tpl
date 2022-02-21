@@ -566,22 +566,45 @@ overflow-y: auto;
 	<div id="variants_block" {assign var=first_variant value=$product_variants|@first}{if $product_variants|@count <= 1 && !$first_variant->name}class=single_variant{/if}>
 		<ul id="header">
 			<li class="variant_move"></li>
-			<li class="variant_name">Название варианта</li>	
-			<li class="variant_sku">Артикул</li>	
+			<li class="variant_sku">Артикул</li>
 			<li class="variant_price">Цена, {$currency->sign}</li>	
 			<li class="variant_discount">Старая, {$currency->sign}</li>	
+			<li class="variant_name">За что цена</li>	
+			<li class="variant_sku">Вес в пачке /<br/>Кило в мешке</li>	
+			<li class="variant_sku">Минимальный заказ</li>
+			<li class="variant_sku">Кратность</li>
+	
+			
 			<li class="variant_amount">Кол-во</li>
 		</ul>
 		<div id="variants">
 		{foreach $product_variants as $variant}
 		<ul>
 			<li class="variant_move"><div class="move_zone"></div></li>
-			<li class="variant_name">      <input name="variants[id][]"            type="hidden" value="{$variant->id|escape}" /><input name="variants[name][]" type="" value="{$variant->name|escape}" /> <a class="del_variant" href=""><img src="design/images/cross-circle-frame.png" alt="" /></a></li>
-			<li class="variant_sku">       <input name="variants[sku][]"           type="text"   value="{$variant->sku|escape}" /></li>
+			<li class="variant_sku">       
+				<input name="variants[id][]"            type="hidden" value="{$variant->id|escape}" />
+				<input name="variants[sku][]"           type="text"   value="{$variant->sku|escape}" />
+				<a class="del_variant" href=""><img src="design/images/cross-circle-frame.png" alt="" /></a>
+			</li>
+			
 			<li class="variant_price">     <input name="variants[price][]"         type="text"   value="{$variant->price|escape}" /></li>
 			<li class="variant_discount">  <input name="variants[compare_price][]" type="text"   value="{$variant->compare_price|escape}" /></li>
+
+			<li class="variant_name">      
+				<input name="variants[name][]" type="" value="{$variant->name|escape}" /> 
+			</li>
+			<li class="variant_sku">
+				<input name="variants[package_weight][]"           type="text"   value="{$variant->package_weight|escape}" />
+			</li>
+			<li class="variant_sku">
+				<input name="variants[minimum_amount][]"           type="text"   value="{$variant->minimum_amount|escape}" />
+			</li>
+			<li class="variant_sku">
+				<input name="variants[items_per_package][]"           type="text"   value="{$variant->items_per_package|escape}" />
+			</li>
+			
 			<li class="variant_amount">    <input name="variants[stock][]"         type="text"   value="{if $variant->infinity || $variant->stock == ''}∞{else}{$variant->stock|escape}{/if}" />{$settings->units}</li>
-			<li class="variant_download">
+			{*<li class="variant_download">
 			
 				{if $variant->attachment}
 					<span class=attachment_name>{$variant->attachment|truncate:25:'...':false:true}</span>
@@ -595,24 +618,37 @@ overflow-y: auto;
 					<input type=hidden name=delete_attachment[]>
 				</div>
 			
-			</li>
+			</li>*}
 		</ul>
 		{/foreach}		
 		</div>
 		<ul id=new_variant style='display:none;'>
 			<li class="variant_move"><div class="move_zone"></div></li>
-			<li class="variant_name"><input name="variants[id][]" type="hidden" value="" /><input name="variants[name][]" type="" value="" /><a class="del_variant" href=""><img src="design/images/cross-circle-frame.png" alt="" /></a></li>
-			<li class="variant_sku"><input name="variants[sku][]" type="" value="" /></li>
+			<li class="variant_sku">
+				<input name="variants[id][]" type="hidden" value="" />
+				<input name="variants[sku][]" type="" value="" />
+				<a class="del_variant" href=""><img src="design/images/cross-circle-frame.png" alt="" /></a>
+			</li>
 			<li class="variant_price"><input  name="variants[price][]" type="" value="" /></li>
 			<li class="variant_discount"><input name="variants[compare_price][]" type="" value="" /></li>
+			<li class="variant_name"><input name="variants[name][]" type="" value="" /></li>
+			<li class="variant_sku">
+				<input name="variants[package_weight][]"           type="text"   value="" />
+			</li>
+			<li class="variant_sku">
+				<input name="variants[minimum_amount][]"           type="text"   value="" />
+			</li>
+			<li class="variant_sku">
+				<input name="variants[items_per_package][]"           type="text"   value="" />
+			</li>
 			<li class="variant_amount"><input name="variants[stock][]" type="" value="∞" />{$settings->units}</li>
-			<li class="variant_download">
+			{*<li class="variant_download">
 				<a href='#' class=add_attachment><img src="design/images/cd_add.png" alt="" /></a>
 				<div class=browse_attachment style='display:none;'>
 					<input type=file name=attachment[]>
 					<input type=hidden name=delete_attachment[]>
 				</div>
-			</li>
+			</li>*}
 		</ul>
 
 		<input class="button_green button_save" type="submit" name="" value="Сохранить" />
