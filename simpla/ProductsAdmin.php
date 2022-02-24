@@ -64,6 +64,20 @@ class ProductsAdmin extends Simpla
 			// Сохранение цен и наличия
 			$prices = $this->request->post('price');
 			$stocks = $this->request->post('stock');
+
+			// Добавляем все переменные варианта как внутри .. орехи
+			// Артикул
+			$skus = $this->request->post('sku');
+			// Старая
+			$compare_prices = $this->request->post('compare_price');
+			// За что цена
+			$names = $this->request->post('name');
+			// Вес в пачке
+			$package_weights = $this->request->post('package_weight');
+			// Мин. заказ
+			$minimum_amounts = $this->request->post('minimum_amount');
+			// Кратно
+			$items_per_packages = $this->request->post('items_per_package');
 		
 			foreach($prices as $id=>$price)
 			{
@@ -71,7 +85,18 @@ class ProductsAdmin extends Simpla
 				if($stock == '∞' || $stock == '')
 					$stock = null;
 					
-				$this->variants->update_variant($id, array('price'=>$price, 'stock'=>$stock));
+				$this->variants->update_variant($id, 
+											array(	
+													'price'=>$price, 
+													'stock'=>$stock,
+
+													'sku'=>$skus[$id],
+													'compare_price'=>$compare_prices[$id],
+													'name'=>$names[$id],
+													'package_weight'=>$package_weights[$id],
+													'minimum_amount'=>$minimum_amounts[$id],
+													'items_per_package'=>$items_per_packages[$id]
+												));
 			}
 		
 			// Сортировка

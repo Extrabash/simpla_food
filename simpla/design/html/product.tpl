@@ -563,8 +563,8 @@ overflow-y: auto;
 
 
  	<!-- Варианты товара -->
-	<div id="variants_block" {assign var=first_variant value=$product_variants|@first}{if $product_variants|@count <= 1 && !$first_variant->name}class=single_variant{/if}>
-		<ul id="header">
+	<div id="variants_block" class="variants_block" {assign var=first_variant value=$product_variants|@first}{if $product_variants|@count <= 1 && !$first_variant->name}class=single_variant{/if}>
+		<ul id="header" class="header">
 			<li class="variant_move"></li>
 			<li class="variant_sku">Артикул</li>
 			<li class="variant_price">Цена, {$currency->sign}</li>	
@@ -577,7 +577,7 @@ overflow-y: auto;
 			
 			<li class="variant_amount">Кол-во</li>
 		</ul>
-		<div id="variants">
+		<div id="variants" class="variants">
 		{foreach $product_variants as $variant}
 		<ul>
 			<li class="variant_move"><div class="move_zone"></div></li>
